@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Legitur</string>
+    <string name="title">Buchtitel</string>
+    <string name="save">Hinzufügen</string>
+</resources>
