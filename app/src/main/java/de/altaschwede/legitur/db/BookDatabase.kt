@@ -1,4 +1,4 @@
-package alta_schwede.de.legitur.db
+package de.altaschwede.legitur.db
 
 import android.arch.persistence.room.Database
 import android.arch.persistence.room.Room
