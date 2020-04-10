@@ -1,7 +1,7 @@
 package de.altaschwede.legitur
 
 import alta_schwede.de.legitur.R
-import de.altaschwede.legitur.db.Book
+import de.altaschwede.legitur.db.BookDto
 import de.altaschwede.legitur.db.BookDatabase
 import de.altaschwede.legitur.db.DbWorkerThread
 import android.support.v7.app.AppCompatActivity
@@ -47,17 +47,17 @@ class MainActivity : AppCompatActivity() {
     fun saveBook(view: View) {
         val editText = findViewById<EditText>(R.id.editText)
         val message = editText.text.toString()
-        val book = Book()
+        val book = BookDto()
         book.name = message
 
         //bindDataWithUi(book)
 
-        insertBookDb(book = book)
+        insertBookDb(bookDto = book)
 
     }
 
-    private fun insertBookDb(book: Book) {
-        val task = Runnable { mDb?.bookDao()?.insert(book) }
+    private fun insertBookDb(bookDto: BookDto) {
+        val task = Runnable { mDb?.bookDao()?.insert(bookDto) }
         mDbWorkerThread.postTask(task)
     }
 }

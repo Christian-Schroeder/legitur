@@ -9,10 +9,10 @@ import android.arch.persistence.room.Query
 interface WeatherDataDao {
 
     @Query("SELECT * FROM books")
-    fun getAll(): List<Book>
+    fun getAll(): List<BookDto>
 
     @Insert(onConflict = REPLACE)
-    fun insert(book: Book)
+    fun insert(bookDto: BookDto)
 
     @Query("DELETE FROM books")
     fun deleteAll()
