@@ -1,4 +1,4 @@
-package de.altaschwede.legitur.db
+package de.altaschwede.legitur.books.db
 
 import android.os.Handler
 import android.os.HandlerThread
