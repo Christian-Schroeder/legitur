@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="de.altaschwede.legitur.main.MainActivity"
+    tools:context="de.altaschwede.legitur.books.BooksActivity"
     tools:layout_editor_absoluteY="81dp">
 
     <Button
