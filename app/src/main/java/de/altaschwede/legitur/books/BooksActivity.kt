@@ -1,7 +1,9 @@
 package de.altaschwede.legitur.books
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
@@ -12,6 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import de.altaschwede.legitur.R
 import de.altaschwede.legitur.books.db.Book
+import de.altaschwede.legitur.sort.SortActivity
 
 
 class BooksActivity : AppCompatActivity() {
@@ -57,6 +60,19 @@ class BooksActivity : AppCompatActivity() {
         // Inflate the menu; this adds items to the action bar if it is present.
         menuInflater.inflate(R.menu.menu_main, menu)
         return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        when (item?.itemId) {
+            R.id.open_sort -> {
+                openSort()
+            }
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
+    private fun openSort(){
+        startActivity(Intent(this, SortActivity::class.java))
     }
 
     fun saveBook(view: View) {
