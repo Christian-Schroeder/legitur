@@ -1,13 +1,13 @@
 package de.altaschwede.legitur.books
 
-import alta_schwede.de.legitur.R
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.RecyclerView
+import de.altaschwede.legitur.R
 
-class BooksAdapter(private var bookTitles: List<String>) :
+class BooksAdapter(private var bookTitles: List<String> = listOf()) :
         RecyclerView.Adapter<BooksAdapter.BooksViewHolder>() {
 
     // Provide a reference to the views for each data item
@@ -40,7 +40,7 @@ class BooksAdapter(private var bookTitles: List<String>) :
 
         // create a new view
         val textView = LayoutInflater.from(parent.context)
-                .inflate(R.layout.book, parent, false)
+                .inflate(R.layout.book_row, parent, false)
         // set the view's size, margins, paddings and layout parameters
 
         return BooksViewHolder(textView)

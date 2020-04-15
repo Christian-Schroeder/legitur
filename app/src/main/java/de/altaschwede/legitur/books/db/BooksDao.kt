@@ -10,7 +10,7 @@ import androidx.room.Query
 @Dao
 interface BooksDao {
 
-    @Query("SELECT * FROM books")
+    @Query("SELECT * FROM books ORDER BY position DESC, id DESC")
     fun getAll(): LiveData<List<Book>>
 
     @Insert(onConflict = REPLACE)

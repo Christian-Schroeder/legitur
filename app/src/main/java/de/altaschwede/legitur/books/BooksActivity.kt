@@ -1,35 +1,35 @@
 package de.altaschwede.legitur.books
 
-import alta_schwede.de.legitur.R
 import android.os.Bundle
+import android.view.Menu
 import android.view.View
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import de.altaschwede.legitur.R
 import de.altaschwede.legitur.books.db.Book
-import de.altaschwede.legitur.books.db.DbWorkerThread
 
 
 class BooksActivity : AppCompatActivity() {
 
-    private lateinit var mDbWorkerThread: DbWorkerThread
-    private lateinit var recyclerView: RecyclerView
-    private lateinit var viewAdapter: BooksAdapter
+    private lateinit var books: RecyclerView
+    private lateinit var booksAdapter: BooksAdapter
     private lateinit var viewManager: RecyclerView.LayoutManager
-    private lateinit var model: BooksViewModel
+    private lateinit var booksViewModel: BooksViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.book_list)
+        setContentView(R.layout.books)
 
         viewManager = LinearLayoutManager(this)
-        viewAdapter = BooksAdapter(listOf("trt", "gdsfs"))
+        booksAdapter = BooksAdapter()
 
 
-        recyclerView = findViewById<RecyclerView>(R.id.books).apply {
+        books = findViewById<RecyclerView>(R.id.books).apply {
             // use this setting to improve performance if you know that changes
             // in content do not change the layout size of the RecyclerView
             setHasFixedSize(true)
@@ -38,23 +38,36 @@ class BooksActivity : AppCompatActivity() {
             layoutManager = viewManager
 
             // specify an viewAdapter (see also next example)
-            adapter = viewAdapter
+            adapter = booksAdapter
         }
 
-        model = ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory
+        booksViewModel = ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory
                 .getInstance(this.application)).get(BooksViewModel::class.java)
-        model.getAllPosts()?.observe(this, Observer {
-            t -> viewAdapter.setData(t.map { it -> it.name })
+        booksViewModel.getAllPosts()?.observe(this, Observer { t ->
+            booksAdapter.setData(t.map { it -> it.title })
         })
+
+        // Attaching the layout to the toolbar object
+        val toolbar = findViewById<Toolbar>(R.id.toolbar)
+        // Setting toolbar as the ActionBar with setSupportActionBar() call
+        setSupportActionBar(toolbar)
     }
 
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        menuInflater.inflate(R.menu.menu_main, menu)
+        return true
+    }
 
     fun saveBook(view: View) {
-        val editText = findViewById<EditText>(R.id.editText)
-        val message = editText.text.toString()
-        val book = Book(null, message)
-
-        model.savePost(book)
+        val title = findViewById<EditText>(R.id.title)
+        val editTitle = title.text.toString()
+        if (editTitle != "") {
+            val book = Book(title = editTitle)
+            booksViewModel.savePost(book)
+            title.text.clear()
+        }
     }
+
 
 }
