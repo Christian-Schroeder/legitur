@@ -13,6 +13,9 @@ interface BooksDao {
     @Query("SELECT * FROM books ORDER BY position DESC, id DESC")
     fun getAll(): LiveData<List<Book>>
 
+    @Query("SELECT * FROM books ORDER BY position DESC, id DESC")
+    suspend fun getAllDirect(): List<Book>
+
     @Insert(onConflict = REPLACE)
     fun insert(book: Book)
 

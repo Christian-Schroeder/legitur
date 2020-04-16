@@ -18,6 +18,10 @@ class BooksViewModel(application: Application) : AndroidViewModel(application) {
         return booksDao?.getAll()
     }
 
+    suspend fun getAllPostsDirect(): List<Book>? {
+        return booksDao?.getAllDirect()
+    }
+
     fun savePost(post: Book) {
         executorService!!.execute { booksDao?.insert(post) }
     }
