@@ -35,6 +35,11 @@ class SortActivity : AppCompatActivity() {
 
     private suspend fun sort(books: List<Book>?) {
         if (books != null) {
+            //randomize books
+            //sort by durchgang and then position
+            //show the last three from the list
+            //let user select one (selected position plus 2, the others minus 1 each, start again)
+            //can be done forever -> show progress bar?
             for ((n, _) in books.withIndex()) {
                 for (i in n - 1 downTo 0) {
                     val o1 = books[i]
